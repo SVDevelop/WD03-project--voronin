@@ -3,7 +3,13 @@
 require "config.php";
 require "db.php";
 $errors = array();
+$success = array();
 session_start();
+
+//===========================================================
+// находим пользователя с правами админа
+$admin = R::findOne('users', 'role = ?', array( 'admin' ));
+//============================================================
 /* ..........................................
 
 РОУТЕР
@@ -46,7 +52,9 @@ switch ( $uri[0]) {
 	case 'about':
 		require ROOT . "modules/about/index.php";
 		break;
-
+	case 'portfolio':
+		require ROOT . "modules/portfolio/index.php";
+		break;
 	case 'contacts':
 		require ROOT . "modules/contacts/index.php";
 		break;

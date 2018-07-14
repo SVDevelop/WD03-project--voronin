@@ -4,7 +4,7 @@
 			<div class="footer__copyright">
 				<p>Team02</p>
 				<p>Создано c <i class="fas fa-heart"> </i> в
-					<a class="link-bold" href="http://webcademy.ru/">WebCademy.ru</a> в 2017 году</p>
+					<a class="link-bold" href="http://verstka32.ru/">verstka32.ru</a> в 2018 году</p>
 			</div>
 			<div class="footer-nav">
 				<ul class="footer__nav-list">

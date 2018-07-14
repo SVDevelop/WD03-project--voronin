@@ -1,7 +1,6 @@
-<?php 		
-		
-echo "Contacts";
+<?php
 
+$title = 'Контакты';
 // Готовим контент для центральной части
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";
@@ -13,5 +12,5 @@ ob_end_clean();
 include ROOT . "templates/_parts/_head.tpl";
 include ROOT . "templates/template.tpl";
 include ROOT . "templates/_parts/_footer.tpl";
-		
+include ROOT . "templates/_parts/_foot.tpl";		
  ?>
