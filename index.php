@@ -1,9 +1,11 @@
 <?php 
 // phpinfo();
-require "config.php";
-require "db.php";
 $errors = array();
 $success = array();
+require "config.php";
+require "db.php";
+require ROOT . "libs/function.php";
+
 session_start();
 
 //===========================================================
@@ -49,19 +51,43 @@ switch ( $uri[0]) {
 	case 'profile-edit':
 		require ROOT . "modules/profile/edit.php";
 		break;
+//=================== categories ==========================================
+	case 'blog/categories':
+		require ROOT . "modules/blog/categories/all.php";
+		break;
+	case 'blog/categories-new':
+		require ROOT . "modules/blog/categories/new.php";
+		break;
+	case 'blog/categories-adit':
+		require ROOT . "modules/blog/categories/edit.php";
+		break;
+	case 'blog/categories-delete':
+		require ROOT . "modules/blog/categories/delete.php";
+		break;
+//=================== blog ==========================================
+	case 'blog':
+		require ROOT . "modules/blog/index.php";
+		break;
+	case 'blog/post-new':
+	require ROOT . "modules/blog/post-new.php";
+		break;
+	case 'blog/post':
+	require ROOT . "modules/blog/post.php";
+		break;
+//=======================
 	case 'about':
 		require ROOT . "modules/about/index.php";
 		break;
+//=======================
 	case 'portfolio':
 		require ROOT . "modules/portfolio/index.php";
 		break;
+//========================
 	case 'contacts':
 		require ROOT . "modules/contacts/index.php";
 		break;
 
-	case 'blog':
-		require ROOT . "modules/blog/index.php";
-		break;
+	
 
 	default:
 		require ROOT . "modules/main/index.php";
