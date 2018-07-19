@@ -1,10 +1,11 @@
 <?php 
-$title = 'Блог - все записи';
-$posts = R::find('posts', 'ORDER BY id DESC');
+
+$title = 'Категории блога';
+$cats = R::find('categories', 'ORDER BY cat_title ABS');
 // Готовим контент для центральной части
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";
-include ROOT . "templates/blog/blog-all-post.tpl";
+include ROOT . "templates/categories/all.tpl";
 $content = ob_get_contents();
 ob_end_clean();
 

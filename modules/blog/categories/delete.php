@@ -1,10 +1,16 @@
 <?php 
-$title = 'Блог - все записи';
-$posts = R::find('posts', 'ORDER BY id DESC');
+
+$title = 'Удалить категорию';
+$cat = R::load('categories', $_GET['id']);
+if  ( isset($_POST['catDelete']) ) {
+	R::trash($cat);
+	header("Location: " . HOST. "blog/categories?result=catDeleted");
+	exit();
+}
 // Готовим контент для центральной части
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";
-include ROOT . "templates/blog/blog-all-post.tpl";
+include ROOT . "templates/categories/delete.tpl";
 $content = ob_get_contents();
 ob_end_clean();
 
