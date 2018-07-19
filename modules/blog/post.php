@@ -1,6 +1,7 @@
 <?php 
 // $title = 'Блог - все записи';
 $post = R::findOne('posts', 'id = ?', array($_GET['id']));
+
 // Готовим контент для центральной части
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";

@@ -5,21 +5,23 @@
 				<div class="blog-full-post__button-edit">
 					<a class="button button--edit" href="#"> Редактировать</a>
 				</div>
-				<h1 class="blog__heading"><?=post['title']?></h1>
+				<h1 class="blog__heading"><?=$post['title']?></h1>
 				<div class="blog__info-wrap">
 					<span class="blog__name">Емельян Казаков</span>
 					<span class="blog__travel">
 						<a href="#">Путешествия</a>
 					</span>
-					<span class="blog__date">16 Марта 2017</span>
+					<span class="blog__date"><?=rus_date("j F Y H:i", strtotime($post['date_time']));?></span>
 					<span class="blog__comments">
 						<a href="#">2 комментария</a>
 					</span>
 				</div>
 				<div class="blog__image">
-					<img src="<?=HOST?>usercontent/blog<?=post['post_img']?>" alt="<?=post['title']?>" />
+					<img src="<?=HOST?>usercontent/blog<?=$post['post_img']?>" alt="<?=$post['title']?>" />
 				</div>
-				<div class="user-content"><?=post['text']?></div>
+				<div class="user-content">
+					<?=$post['text']?>
+				</div>
 				<div class="flex-container-button mt-30">
 					<a class="button " href="#"><i class="fas fa-arrow-left icon-style icon-style--back"></i>Назад</a>
 					<a class="button" href="#">Вперед<i class="fas fa-arrow-right icon-style"></i></a>
@@ -51,7 +53,9 @@
 						<div class="comment-wrap">
 							<div class="user-name">Джо До</div>
 							<div class="user-date"><i class="far fa-clock"></i>
-								<span class="user-date--dat"><?=rus_data("j F Y H:i", strtotime($post['date_time'])); ?></span>
+								<span class="user-date--dat">
+									date
+								</span>
 							</div>
 						</div>
 						<p class="user-text">Замечательный парк, обязательно отправлюсь туда этим летом.</p>

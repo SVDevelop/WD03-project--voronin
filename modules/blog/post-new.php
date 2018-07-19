@@ -1,16 +1,20 @@
 <?php 
 
+// echo "<pre>";
+// 	echo print_r($_GET);
+// echo "</pre>";
+
 $title = 'Блог - добавить пост';
 if ( isset($_POST['postNew'])  ) {
 	if ( trim($_POST['postTitle']) == "" ) {
-		$errors[] = ['title'=>'Введите название поста'];
+		$errors[] = ['title' => 'Введите название поста'];
 	}
 	if ( trim($_POST['postText']) == "" ) {
-		$errors[] = ['title'=>'Введите текст поста'];
+		$errors[] = ['title' => 'Введите текст поста'];
 	}
 	if ( empty($errors) ) {
-		$post = R::dispans('posts');
-		$post->title = htmlentitle($_POST['postTitle']);
+		$post = R::dispense('posts');
+		$post->title = htmlentities($_POST['postTitle']);
 		$post->text = $_POST['postText'];
 		$post->authorId = $_SESSION['logged_user']['id'];
 		$post->dateTime = R::isoDateTime();
@@ -71,7 +75,7 @@ if ( isset($_POST['postNew'])  ) {
 			//$resized_file = $postImgFolderLocation . $db_file_name;
 			$wmax = 920;
 			$hmax = 620;
-			$img = createThumbnailBig($target_file, $wmax, $hmax);
+			$img = createThumbnail($target_file, $wmax, $hmax);
 			$img->writeImage($target_file);
 
 			$post->postImg = $db_file_name;
@@ -80,11 +84,14 @@ if ( isset($_POST['postNew'])  ) {
 			$resized_file = $postImgFolderLocation . "320-" . $db_file_name;
 			$wmax = 320;
 			$hmax = 140;
-			$img = createThumbnailCrop($target_file, $wmax, $hmax);
+			$img = createThumbnail($target_file, $wmax, $hmax);
 			$img->writeImage($resized_file);
 
 			$post->postImgSmall = "320-" . $db_file_name;
 		}
+		R::store($post);
+		header('Location: ' . HOST . "blog");
+		exit();
 	}
 }
 // Готовим контент для центральной части
