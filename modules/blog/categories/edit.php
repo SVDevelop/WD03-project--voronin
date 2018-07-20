@@ -7,7 +7,7 @@ $title = 'Редактировать категорию';
 $cat = R::load('categories', $_GET['id']);
 if  ( isset($_POST['catEdit']) ) {
 	if ( trim($_POST['catTitle']) == "" ) {
-		$errors[] = ['catTitle' => 'Введите название категории'];
+		$errors[] = ['title' => 'Введите название категории'];
 	}
 	if ( empty($errors) ) {
 	$cat->cat_title = htmlentities($_POST['catTitle']);

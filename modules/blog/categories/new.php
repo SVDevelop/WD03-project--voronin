@@ -6,7 +6,7 @@ if ( !isAdmin()) {
 $title = 'Создать новую категорию';
 if  ( isset($_POST['catNew']) ) {
 	if ( trim($_POST['catTitle']) == "" ) {
-		$errors[] = ['catTitle' => 'Введите название категории'];
+		$errors[] = ['title' => 'Введите название категории'];
 	}
 	if ( empty($errors) ) {
 	$cat = R::dispense('categories');

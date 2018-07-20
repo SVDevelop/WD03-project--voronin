@@ -1,16 +1,10 @@
 <?php 
-
-	//echo "<pre>";
-	//print_r($errors);
-	//echo "</pre>";
-
-
 	foreach ($errors as $error) {
 		if ( count($error) == 1) {  ?>
 
 <!-- Однострочная ошибка -->
 <div class="error">
-	<?=$error['catTitle']?>
+	<?=$error['title']?>
 </div>
 
 <?php 	} else if ( count($error) == 2 ) { ?>
