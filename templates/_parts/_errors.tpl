@@ -1,8 +1,8 @@
 <?php 
 
-	// echo "<pre>";
-	// print_r($errors);
-	// echo "</pre>";
+	//echo "<pre>";
+	//print_r($errors);
+	//echo "</pre>";
 
 
 	foreach ($errors as $error) {
@@ -10,7 +10,7 @@
 
 <!-- Однострочная ошибка -->
 <div class="error">
-	<?=$error['title']?>
+	<?=$error['catTitle']?>
 </div>
 
 <?php 	} else if ( count($error) == 2 ) { ?>

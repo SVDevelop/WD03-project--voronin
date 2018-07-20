@@ -102,7 +102,7 @@ if ( isset($_POST['profile-update']) ) {
 
 		R::store($user);
 		$_SESSION['logged_user'] = $user;
-		header('Location: ' . HOST . "profile");
+		header("Location:  . HOST . "profile");
 		exit();
 	}
 

@@ -147,7 +147,7 @@ $(document).ready(function() {
 		}
 	});
 
-
-
-
+	setTimeout(function(){
+		$('[data-notify-hidde]').slideUp(400);
+	}, 2000);
 });
