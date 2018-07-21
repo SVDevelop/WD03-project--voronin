@@ -27,7 +27,7 @@
 				<div class="footer__copyright">
 					<p>© Сергей Воронин</p>
 					<p>Создано c <i class="fas fa-heart"> </i> в
-						<a class="link-bold" href="http://verstka32.ru/">verstka32.ru</a> в 2018 году </p>
+						<a class="link-bold" href="<?=HOST?>">verstka32.ru</a> в 2018 году </p>
 				</div>
 			</div>
 	</div>

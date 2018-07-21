@@ -26,6 +26,6 @@
 		</div>
 	</div>
 	<div class="login-page-form__footer">
-		<input name="login" type="submit" class="button button--enter" value="Войти" />
+		<input name="enter" type="submit" class="button button--enter" value="Войти" />
 	</div>
 </form>

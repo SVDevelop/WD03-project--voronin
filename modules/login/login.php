@@ -2,43 +2,30 @@
 
 $title = "Вход на сайт";
 
-if ( isset($_POST['login'])) {
-
+if ( count($_POST) && empty($_POST['enter'])) {
 	if ( trim($_POST['email']) == '') {
 		$errors[] = ['title' => 'Введите Email' ];
 	}
-
 	if ( trim($_POST['password']) == '') {
 		$errors[] = ['title' => 'Введите Пароль' ];
 	}
-	if ( !(R::count('users', 'email = ?', array($_POST['email']) ) > 0)) {
-		$errors[] = ['title' => 'Введите верные данные' ];
-	} else {
-		if ( empty($errors)) {
-			$user = R::findOne('users', 'email = ?', array($_POST['email']) );
-
-			if ( isset($user) ) {
-				if ( password_verify( $_POST['password'], $user->password ) ) {
-					$_SESSION['logged_user'] = $user;
-					$_SESSION['login'] = "1";
-					$_SESSION['role'] = $user->role;
-					header("Location: ". HOST);
-					exit();
-				} else { 
-					echo "<pre>";
-					print_r($_POST);
-					echo "</pre>";
-					$errors[] = ['title' => 'Пароль введен неверно' ];
-				}
-			} else {
-				echo "<pre>";
-				print_r($errors);
-				echo "</pre>";
-				$errors[] = ['title' => 'Gjkmpjdfntkm yt yfqlty' ];
-				header("Location: ". HOST."login?404");
+	if ( empty($errors)) {
+		$user = R::findOne('users', 'email = ?', array($_POST['email']) );
+		if ( isset($user) ) {
+			if ( password_verify( $_POST['password'], $user->password ) ) {
+				$_SESSION['logged_user'] = $user;
+				$_SESSION['login'] = "1";
+				$_SESSION['role'] = $user->role;
+				header("Location: ". HOST);
+				exit();
+			} else { 
+				$errors[] = ['title' => 'Пароль введен неверно' ];
 			}
+		}else {
+			$errors[] = ['title' => 'Введите верные данные'];
 		}
-	}
+	} 
+
 }
 
 // Готовим контент для центральной части
