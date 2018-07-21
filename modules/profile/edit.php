@@ -6,8 +6,8 @@ $currentUser = $_SESSION['logged_user'];
 $user = R::load('users', $currentUser->id);
 
 if ( isset($_POST['profile-update']) ) {
-
-	if ( trim($_POST['email']) == '') {
+	$user = R::findOne('users', 'id = ?', array($currentUser->id) );
+	if ( trim($_POST['email']) == '' ) {
 		$errors[] = ['title' => 'Введите Email' ];
 	}
 
@@ -20,6 +20,8 @@ if ( isset($_POST['profile-update']) ) {
 	}
 
 	if ( empty($errors)	) {
+		if ( !(R::count('users', 'email = ?', array($_POST['email']) ) > 0 && $user->email != $_POST['email'] ) ) {
+
 		$user->name = htmlentities($_POST['name']);
 		$user->secondname = htmlentities($_POST['secondname']);
 		$user->email = htmlentities($_POST['email']);
@@ -104,6 +106,12 @@ if ( isset($_POST['profile-update']) ) {
 		$_SESSION['logged_user'] = $user;
 		header("Location: ". HOST."profile");
 		exit();
+		} else {
+			$errors[]  = [ 
+		 					'title' => 'Пользователь с там email уже зарегистрирован', 
+							'desc' => '<p>Используйте другой Email адрес</p>', 
+		 					];
+		}
 	}
 
 }

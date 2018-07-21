@@ -1,15 +1,3 @@
-<?php 
-
-// echo "<pre>";
-// print_r($post);
-// echo "</pre>";
-
-// echo "<pre>";
-// print_r($cats);
-// echo "</pre>";	
-
- ?>
-
 <div class="container">
 	<div class="row">
 		<div class="col-xl-10 offset-1">
@@ -30,14 +18,12 @@
 					<label>
 						<div class="fieldset__title">Категория</div>
 						<select name="postCat">
-
 							<?php foreach ($cats as $cat): ?>
 							<option value="<?=$cat['id']?>" <?php echo ($post[ 'cat']==$cat[ 'id'] ) ? "selected" : ""; ?>
 								>
 								<?=$cat['cat_title']?>
 							</option>
 							<?php endforeach ?>
-
 						</select>
 					</label>
 				</div>
