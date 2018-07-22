@@ -1,5 +1,5 @@
 <?php 
-	if ( isset($_SESSION['logged_user']) && $_SESSION['login'] == 1 && $_SESSION['role'] == 'admin'   ) {
+	if ( isAdmin() ) {
 		include ROOT . "templates/_parts/_admin-panel.tpl";
 	}
 ?>
@@ -9,7 +9,7 @@
 		<div class="header__top mb-0">
 			<?php include( ROOT . "templates/_parts/_header-logo.tpl"); ?>
 			<?php 
-				if ( isset($_SESSION['logged_user']) && $_SESSION['login'] == 1  ) {
+				if ( isLoggedIn() ) {
 					
 					// Пользователь на сайте
 					if ( $_SESSION['role'] != 'admin' ) {
