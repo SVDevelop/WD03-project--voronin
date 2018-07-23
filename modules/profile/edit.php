@@ -1,13 +1,12 @@
 <?php 
 
 $title = "Редактировать профиль";
-
 $currentUser = $_SESSION['logged_user'];
 $user = R::load('users', $currentUser->id);
 
 if ( isset($_POST['profile-update']) ) {
-
-	if ( trim($_POST['email']) == '') {
+	$user = R::findOne('users', 'id = ?', array($currentUser->id) );
+	if ( trim($_POST['email']) == '' ) {
 		$errors[] = ['title' => 'Введите Email' ];
 	}
 
@@ -20,6 +19,8 @@ if ( isset($_POST['profile-update']) ) {
 	}
 
 	if ( empty($errors)	) {
+		if ( !(R::count('users', 'email = ?', array($_POST['email']) ) > 0 && $user->email != $_POST['email'] ) ) {
+
 		$user->name = htmlentities($_POST['name']);
 		$user->secondname = htmlentities($_POST['secondname']);
 		$user->email = htmlentities($_POST['email']);
@@ -42,33 +43,19 @@ if ( isset($_POST['profile-update']) ) {
 			if ($width < 10 || $height < 10 ) {
 				$errors[] = ['title' => 'Изображение не имеет размеров. Загрузите изображение побольше.' ];
 			}
-
 			if ( $fileSize > 4194304 ) {
 				$errors[] = ['title' => 'Файл изображения не должен быть более 4 Mb' ];
 			}
-
 			if ( !preg_match("/\.(gif|jpg|jpeg|png)$/i", $fileName) ) {
 				$errors[]  = [ 'title' => 'Неверный формат файла', 'desc' => '<p>Файл изображения должен быть в формате gif, jpg, jpeg, или png.</p>', ];
 			}
-
 			if ( $fileErrorMsg == 1 ) {
 				$errors[] = ['title' => 'При загрузке изображения произошла ошибка. Повторите попытку' ];
 			}
 
-			// Поверям установлен ли аватар у пользователя
-			$avatar = $user->avatar;
 			$avatarFolderLocation = ROOT . 'usercontent/avatar/';
-
-			// Если аватар уже установлен, то есть загружен ранее то удаляем файл аватара
-			if ( $avatar != "" ) {
-				$picurl = $avatarFolderLocation . $avatar;
-				// Удаляем аватар
-				// die($picurl); 
-			    if ( file_exists($picurl) ) { unlink($picurl); }
-				$picurl48 = $avatarFolderLocation . '48-' . $avatar;
-			    if ( file_exists($picurl48) ) { unlink($picurl48); }
-			}
-
+			imgDeleted($user->avatar, $avatarFolderLocation, 48);
+			
 			// Перемещаем загруженный файл в нужную директорию
 			$db_file_name = rand(10000000,99999999) . "." . $fileExt;
 			$uploadfile = $avatarFolderLocation . $db_file_name;
@@ -84,28 +71,34 @@ if ( isset($_POST['profile-update']) ) {
 			// $resized_file = $avatarFolderLocation . $db_file_name;
 			$wmax = 222;
 			$hmax = 222;
-			$img = createThumbnail($target_file, $wmax, $hmax);
+			$img = createThumbnailBig($target_file, $wmax, $hmax);
 			$img->writeImage($target_file);
-
 			$user->avatar = $db_file_name;
-
 			$target_file =  $avatarFolderLocation . $db_file_name;
 			$resized_file = $avatarFolderLocation . "48-" . $db_file_name;
 			$wmax = 48;
 			$hmax = 48;
-			$img = createThumbnail($target_file, $wmax, $hmax);
+			$img = createThumbnailCrop($target_file, $wmax, $hmax);
 			$img->writeImage($resized_file);
-
 			$user->avatarSmall = "48-" . $db_file_name;
-
 		}
+		
+		$FolderLocation = ROOT . 'usercontent/avatar/';
+
+		//uploadFile ($user->avatar, $avatar, $FolderLocation, 48);
+
 
 		R::store($user);
 		$_SESSION['logged_user'] = $user;
-		header('Location: ' . HOST . "profile");
+		header("Location: ". HOST."profile");
 		exit();
+		} else {
+			$errors[]  = [ 
+		 				'title' => 'Пользователь с там email уже зарегистрирован', 
+						'desc' => '<p>Используйте другой Email адрес</p>', 
+		 				];
+		}
 	}
-
 }
 
 // Готовим контент для центральной части
