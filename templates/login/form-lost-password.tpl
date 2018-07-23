@@ -1,11 +1,19 @@
+
+<?php 
+	 echo "<pre>";
+	 print_r($_POST);
+	 echo "</pre>";
+	//echo "<pre>";
+	// print_r($user);
+	//echo "</pre>";
+	echo $user['properties:protected'];
+	// echo $user->recovery_code;
+	// echo $user->recovery_code_times;
+ ?>
 <form id="lostForm" class="login-page-form" method="POST" action="<?=HOST?>lost-password">
 	<div class="login-page-form__header">Забыл пароль</div>
 
-	<?php 
-		// echo "<pre>";
-		// print_r($_POST);
-		// echo "</pre>";
-	 ?>
+
 
 	<?php require ROOT . "templates/_parts/_errors.tpl" ?>
 	<?php require ROOT . "templates/_parts/_success.tpl" ?>

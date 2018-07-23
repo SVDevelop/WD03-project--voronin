@@ -12,7 +12,9 @@ if ( isset($_POST['register'])) {
 	if ( trim($_POST['password']) == '') {
 		$errors[] = ['title' => 'Введите Пароль' ];
 	}
-
+	if ( !(checkEmail($_POST['email'])) ) {
+		$errors[]  = [ 'title' => 'Введите корректный email' ];
+	}
 
 	// Проверка что пользователь уже существует
 	if ( R::count('users', 'email = ?', array($_POST['email']) ) > 0 ) {
@@ -34,7 +36,7 @@ if ( isset($_POST['register'])) {
 		$_SESSION['login'] = "1";
 		$_SESSION['role'] = $user->role;
 
-		header('Location: ' . HOST . "profile-edit");
+		header("Location: ". HOST . "profile-edit");
 		exit();
 
 	}
