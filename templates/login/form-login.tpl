@@ -1,23 +1,15 @@
 <form id="loginForm" class="login-page-form" method="POST" action="<?=HOST?>login">
 	<div class="login-page-form__header">Вход на сайт</div>
-
-	<?php 
-		// echo "<pre>";
-		// print_r($_POST);
-		// echo "</pre>";
-	 ?>
-
 	<?php require ROOT . "templates/_parts/_errors.tpl" ?>
-
 	<div class="registration-page-form__row">
 		<div class="error hidden">Введите email</div>
 	</div>
 
 	<div class="login-page-form__row">
-		<input name="email" class="input" type="email" placeholder="E-mail" /><!-- value="info@mail.com" /> -->
+		<input name="email" class="input" type="email" placeholder="E-mail" />
 	</div>
 	<div class="login-page-form__row">
-		<input name="password" class="input" type="password" placeholder="Пароль" /><!-- value="123456"  -->
+		<input name="password" class="input" type="password" placeholder="Пароль" />
 	</div>
 	<div class="login-page-form__row">
 		<div class="login-page-form__col">
@@ -34,7 +26,6 @@
 		</div>
 	</div>
 	<div class="login-page-form__footer">
-		<input name="login" type="hidden" value="login" />
-		<a class="button button--enter">Войти</a>
+		<input name="enter" type="submit" class="button button--enter" value="Войти" />
 	</div>
 </form>

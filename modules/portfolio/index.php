@@ -3,7 +3,7 @@ $title = 'Примеры работ';
 // Готовим контент для центральной части
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";
-include ROOT . "templates/portfolio/portfolio.tpl";
+include ROOT . "templates/portfolio/works.tpl";
 $content = ob_get_contents();
 ob_end_clean();
 

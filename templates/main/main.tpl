@@ -1,5 +1,5 @@
 <main>
-
+	<?php include ROOT."templates/about/_about-text.tpl"; ?>
 	<hr/>
 	<div class="container">
 		<div class="title-1 mb-25">Новые
