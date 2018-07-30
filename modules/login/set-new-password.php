@@ -19,7 +19,7 @@ if ( !empty($_GET['email']) ) {
 			echo "<br><br>";
 			echo "<a href='" . HOST . "'>Вернуться на главную</a>";
 			die;
-		}
+		} 
 
 		// Проверка верности кода
 		if ( $user->recovery_code == $_GET['code'] ) {

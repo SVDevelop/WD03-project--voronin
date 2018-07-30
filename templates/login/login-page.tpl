@@ -1,4 +1,3 @@
-<!-- <body class="registration-page"> -->
 <div class="registration-page-content">
 	<div class="registration-page__container">
 		<div class="registration-page-header">
@@ -6,7 +5,7 @@
 				<a class="header__logo-icon-link" href="#"><i class="far fa-paper-plane"></i></a>
 				<div class="header__general">
 					<p class="header__title mb-0">
-						<a class="header__title" href="<?=$_SERVER["REQUEST_URI"]?>">Супер Сайт</a>
+						<a class="header__title" href="<?=HOST?>">Супер Сайт</a>
 					</p>
 				</div>
 			</div>
@@ -27,7 +26,7 @@
 				<div class="footer__copyright">
 					<p>© Сергей Воронин</p>
 					<p>Создано c <i class="fas fa-heart"> </i> в
-						<a class="link-bold" href="http://webcademy.ru/">verstka32.ru</a> в 2018 году </p>
+						<a class="link-bold" href="<?=HOST?>">verstka32.ru</a> в 2018 году </p>
 				</div>
 			</div>
 	</div>

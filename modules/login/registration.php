@@ -12,7 +12,9 @@ if ( isset($_POST['register'])) {
 	if ( trim($_POST['password']) == '') {
 		$errors[] = ['title' => 'Введите Пароль' ];
 	}
-
+	if ( !(checkEmail($_POST['email'])) ) {
+		$errors[]  = [ 'title' => 'Введите корректный email' ];
+	}
 
 	// Проверка что пользователь уже существует
 	if ( R::count('users', 'email = ?', array($_POST['email']) ) > 0 ) {
@@ -26,15 +28,21 @@ if ( isset($_POST['register'])) {
 		// Alright, Register!
 		$user = R::dispense('users');
 		$user->email = htmlentities($_POST['email']);
-		$user->role = 'user';
+		$user->role_id = '2'; //value of default user
 		$user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-		R::store($user);
+		$user->date_registration = R::isoDateTime();
+
+		// $role = R::dispense('userrole');
+		// $role->role = 'user';
+		// $role->ownUseresList[] = $user;
+		// R::store($user);
 
 		$_SESSION['logged_user'] = $user;
 		$_SESSION['login'] = "1";
-		$_SESSION['role'] = $user->role;
-
-		header('Location: ' . HOST . "profile-edit");
+		$_SESSION['role'] = $user->role_id;
+		// $_SESSION['role'] = $role->role;
+		R::store($user);
+		header("Location: ". HOST . "profile-edit");
 		exit();
 
 	}

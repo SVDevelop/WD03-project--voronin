@@ -4,33 +4,33 @@
 			<div class="footer__copyright">
 				<p>Team02</p>
 				<p>Создано c <i class="fas fa-heart"> </i> в
-					<a class="link-bold" href="http://verstka32.ru/">verstka32.ru</a> в 2018 году</p>
+					<a class="link-bold" href="http://webcademy.ru/">WebCademy.ru/</a> в 2018 году</p>
 			</div>
 			<div class="footer-nav">
 				<ul class="footer__nav-list">
 					<li class="footer__nav-item">
-						<a href="#">Главная</a>
+						<a href="<?=HOST?>">Главная</a>
 					</li>
 					<li class="footer__nav-item">
-						<a href="#">Обо мне</a>
+						<a href="<?=HOST?>about">Обо мне</a>
 					</li>
 					<li class="footer__nav-item">
-						<a href="#">Работы</a>
+						<a href="<?=HOST?>works">Работы</a>
 					</li>
 					<li class="footer__nav-item">
-						<a href="#">Блог</a>
+						<a href="<?=HOST?>blog">Блог</a>
 					</li>
 					<li class="footer__nav-item">
-						<a href="#">Контакты</a>
+						<a href="<?=HOST?>contacts">Контакты</a>
 					</li>
 				</ul>
 			</div>
 			<div class="footer__icons">
-				<a href="#"><i class="fab fa-vk"></i></a>
-				<a href="#"><i class="fab fa-twitter"></i></a>
-				<a href="#"><i class="fab fa-youtube"></i></a>
-				<a href="#"><i class="fab fa-instagram"></i></a>
-				<a href="#"><i class="fab fa-facebook"></i></a>
+				<a href="https://vk.com/fullstackdevelop" target="_blank"><i class="fab fa-vk"></i></a>
+				<!-- <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+				<a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+				<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+				<a href="#" target="_blank"><i class="fab fa-facebook"></i></a> -->
 			</div>
 		</div>
 	</div>
