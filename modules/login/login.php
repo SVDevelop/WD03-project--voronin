@@ -2,34 +2,32 @@
 
 $title = "Вход на сайт";
 
-if ( isset($_POST['login'])) {
-
+if ( count($_POST) && empty($_POST['enter'])) {
 	if ( trim($_POST['email']) == '') {
 		$errors[] = ['title' => 'Введите Email' ];
 	}
-
 	if ( trim($_POST['password']) == '') {
 		$errors[] = ['title' => 'Введите Пароль' ];
 	}
-
 	if ( empty($errors)) {
 		$user = R::findOne('users', 'email = ?', array($_POST['email']) );
-
-		if ( $user ) {
+		if ( isset($user) ) {
 			if ( password_verify( $_POST['password'], $user->password ) ) {
 				$_SESSION['logged_user'] = $user;
 				$_SESSION['login'] = "1";
-				$_SESSION['role'] = $user->role;
-				header("Location: " . HOST);
+				$_SESSION['role'] = $user->role_id;
+				// $_SESSION['role'] = $role->role;
+				header("Location: ". HOST);
 				exit();
-			} else {
+			} else { 
 				$errors[] = ['title' => 'Пароль введен неверно' ];
 			}
+		}else {
+			$errors[] = ['title' => 'Введите верные данные'];
 		}
+	} 
 
-	}
 }
-
 
 // Готовим контент для центральной части
 ob_start();

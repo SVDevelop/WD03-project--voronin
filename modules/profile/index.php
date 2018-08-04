@@ -3,6 +3,12 @@
 $title = "Профиль пользователя";
 
 $currentUser = $_SESSION['logged_user'];
+$sqlComments = 'SELECT 
+		comments.text, comments.date_time, comments.user_id,
+		users.name, users.secondname, users.avatar_small
+	FROM `comments`
+	INNER JOIN users ON comments.user_id = users.id';
+$comments = R::getAll($sqlComments);
 
 // Готовим контент для центральной части
 ob_start();

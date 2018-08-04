@@ -1,6 +1,11 @@
 <?php
 
 $title = 'Обо мне';
+
+$about = R::load('about', 1);
+$skills = R::load('skills', 1);
+$jobs = R::find('job', 'ORDER BY id DESC');
+
 // Готовим контент для центральной части
 ob_start();
 include ROOT . "templates/_parts/_header.tpl";

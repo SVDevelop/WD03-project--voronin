@@ -16,5 +16,9 @@ define('HOST', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/')
 // Физический путь к корневой директории скрипта
 define('ROOT', dirname(__FILE__).'/');
 
+define('ADMIN', 1); //$_SESSION['logged_user'] = USER;
+define('USER', 2);
+define('POST_LIMIT', 6);//лимит записей выводимых на странице
+
 
 ?>

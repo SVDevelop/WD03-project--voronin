@@ -1,4 +1,5 @@
 <?php 
+$title = "Востановление пароля";
 
 if ( isset($_POST['lost-password'])) {
 	
