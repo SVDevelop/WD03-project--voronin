@@ -3,12 +3,6 @@
 	<div class="login-page-form__header">Введите новый пароль</div>
 	<?php endif ?>
 
-	<?php 
-		// echo "<pre>";
-		// print_r($_POST);
-		// echo "</pre>";
-	 ?>
-
 	<?php require ROOT . "templates/_parts/_errors.tpl" ?>
 	<?php require ROOT . "templates/_parts/_success.tpl" ?>
 
@@ -20,6 +14,9 @@
 	<div class="login-page-form__row">
 		<input name="resetpassword" class="input" type="password" placeholder="Новый пароль" />
 	</div>
+	<!-- <div class="login-page-form__row">
+		<input name="resetpassword-repeat" class="input" type="password" placeholder="Повторите пароль" />
+	</div> -->
 	<?php endif ?>
 	<div class="login-page-form__row text-center">
 		<div class="login-page-form__col text-center">

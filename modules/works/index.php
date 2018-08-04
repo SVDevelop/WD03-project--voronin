@@ -1,7 +1,8 @@
 <?php 	
 
 $title = 'Примеры работ';
-$count = count(R::findAll('works', 'ORDER BY id DESC'));
+
+$count =  R::getCell('SELECT COUNT(*) FROM works'); //количество записей в таблице
 
 if ( isset($_GET['id']) && $_GET['id'] != "" ) {
 	// echo "autor";

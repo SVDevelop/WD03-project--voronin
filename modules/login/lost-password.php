@@ -1,30 +1,27 @@
 <?php 
+$title = "Востановление пароля";
 
-
-$title = 'Сброс пароля';
-if ( isset($_POST['lost-password']) ) {
+if ( isset($_POST['lost-password'])) {
 	
 	if ( trim($_POST['email']) == '') {
 		$errors[] = ['title' => 'Введите Email' ];
 	}
-	if ( !checkEmail($_POST['email']) ) {
-		$errors[] = ['title' => 'Введите корректный Email' ];
-	}
+
 	if ( empty($errors)) {
 
 		$user = R::findOne('users', 'email = ?', array($_POST['email']) );
 
-		if ( isset($user) && $user->recovery_code_times > 1) {
+		if ( $user ) {
 
 			// Генерация кода и сохранение кода в БД
 			function random_str( $num = 30 ) {
 				return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $num);
 			}
-
 			$recovery_code = random_str(15);
 			$user->recovery_code = $recovery_code;
 			$user->recovery_code_times = 3;
 			R::store($user);
+
 			// Высылаем инструкции на почту
 			$recovery_message = "<p>Код для сброса пароля: <b>$recovery_code</b></p>";
 			$recovery_message .= "<p>Для сброса пароля перейдите по ссылке ниже, и установите новый пароль:</p>";
@@ -40,14 +37,14 @@ if ( isset($_POST['lost-password']) ) {
 			
 			mail($_POST['email'], 'Восстановление доступа', $recovery_message, $headers);
 			
-			//$success[] = "Инструкции по восстановлению доступа высланы на " . $_POST['email'];
+			// $success[] = "Инструкции по восстановлению доступа высланы на " . $_POST['email'];
 			$success[] = [
 					'title' => "Все отлично!)" ,
 					'desc' => "<p>Инструкции по восстановлению доступа высланы на {$_POST['email']}</p>" 
 
 				];
 
-		} elseif (!$user) {
+		} else {
 			$errors[] = ['title' => "Пользователь с таким email не зарегистрирован" ];
 		}
 
@@ -64,4 +61,5 @@ ob_end_clean();
 include ROOT . "templates/_parts/_head.tpl";
 include ROOT . "templates/login/login-page.tpl";
 include ROOT . "templates/_parts/_foot.tpl";
+
 ?>

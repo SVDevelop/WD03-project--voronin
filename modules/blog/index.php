@@ -1,5 +1,5 @@
 <?php
-$count = count(R::findAll('posts', 'ORDER BY id DESC'));
+$count =  R::getCell('SELECT COUNT(*) FROM posts'); //количество записей в таблице
 
 if ( isset($_GET['id']) && $_GET['id'] != "" ) {
 	if (is_string($_GET['id'])) {

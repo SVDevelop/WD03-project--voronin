@@ -1,4 +1,5 @@
 <?php 
+$title = "Востановление пароля";
 
 $recoveryCode = false;
 $newPasswordReady = false;
@@ -37,27 +38,35 @@ if ( !empty($_GET['email']) ) {
 	// Если форма установки нового пароля для пользователя отправлена
 	// Ищем пользователя по Email
 	$user = R::findOne('users', 'email = ?', array( $_POST['resetemail']) );
-	$user->recovery_code_times--; // recovery_code_times = 1
+
+	$user->recovery_code_times--;//recovery_code_times = 1
 	R::store($user);
 
-	$user = R::findOne('users', 'email = ?', array($_POST['resetemail']));
 	if ( $user ) {
 		if ( $user->recovery_code_times < 1 ) {
 			die;
 		}
-
-		// Проверяем onetimecode
-		if ( $user->recovery_code == $_POST['onetimecode']) { 
-
-			// Если все верно - ставим новый пароль и убиваем код
-			$user->password = password_hash($_POST['resetpassword'], PASSWORD_DEFAULT);
-
-			// в любом случае убиваем код
-			$user->recovery_code_times = 0; // recovery_code_times = 0
-			R::store($user);
-			$success[] = ['title' => "Пароль обновлен"];
-			$newPasswordReady = true;
+		if ( trim( $_POST['resetpassword']) == "" ) {
+			$errors[] = ['title' => 'Введите пароль' ];
 		}
+		// if ( trim( $_POST['resetpassword']) != trim($_POST['resetpassword-repeat'])) {
+		// 	$errors[] = ['title' => 'Пароли не совпадают' ];
+		// }
+		if ( empty($errors) ) {
+			// Проверяем onetimecode
+			if ( $user->recovery_code == $_POST['onetimecode']) { 
+
+				// Если все верно - ставим новый пароль и убиваем код
+				$user->password = password_hash($_POST['resetpassword'], PASSWORD_DEFAULT);
+
+				// в любом случае убиваем код
+				$user->recovery_code_times = 0; // recovery_code_times = 0
+				R::store($user);
+				$success[] = ['title' => "Пароль обновлен"];
+				$newPasswordReady = true;
+			}
+		}
+				
 	}
 
 } else {

@@ -38,7 +38,9 @@
 				<div class="fieldset">
 					<label>
 						<div class="fieldset__title">Содержание</div>
-						<textarea id="ckEditor" name="postText" class="textarea height-200" rows="7" placeholder="Введите описание"><?=@$_POST['postText']?></textarea>
+						<textarea id="ckEditor" name="postText" class="textarea height-200" rows="7" placeholder="Введите описание">
+							<?=@$_POST['postText']?>
+						</textarea>
 						<?php include_once ROOT . "templates/_parts/_ckEditorConnect.tpl" ?>
 					</label>
 				</div>
